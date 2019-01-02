@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/dist/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../static/cover.css">
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div id="main" class="cover-container">
+
+          <div class="inner cover">
+            <h1 class="cover-heading">KPOP Spot It</h1>
+            <form id="createRoomForm" class="small-container" enctype="multipart/form-data" onsubmit="return false">
+              <label for="hostID" class="sr-only">Username</label>
+              <input type="text" id="hostID" name="hostID" class="form-control" placeholder="Username" required autofocus>
+              <label for="roomID"  class="sr-only">RoomName</label>
+              <input type="text" id="roomID" name="roomID" class="form-control" placeholder="Room Name" required>
+              <br>
+              <button class="btn btn-default"  onclick="submitForm('{{ url_for('create_room_path') }}', 'createRoomForm', event)">Create Room</button>
+            </form>
+           
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../static/dist/js/bootstrap.min.js"></script>
+    <script src="../static/main.js"></script>
+  </body>
+</html>

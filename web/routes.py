@@ -1,5 +1,5 @@
 from main import app
-from flask import request
+from flask import request, render_template
 from utils import *
 from room import join_room, create_room, leave_room, Room_Manager
 
@@ -8,7 +8,7 @@ room_manager = Room_Manager()
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('index.html')
 
 @app.route('/join', methods=["POST"])
 def join_room_path():
