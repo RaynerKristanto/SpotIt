@@ -39,12 +39,12 @@ class Room_Manager:
     def get_rooms(self):
         return list(map(lambda x : str(self.rooms[x]), list(self.rooms)))
 
-
 class Room:
-    def __init__(self, id=None, host=None):
+    def __init__(self, id=None, host=None, name=None):
         self.id = id
         self.host = host
         self.members = {host}
+        self.name = name
 
     def add_member(self, member):
         if member == None:

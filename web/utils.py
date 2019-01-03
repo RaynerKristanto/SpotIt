@@ -1,4 +1,6 @@
 from enum import Enum
+import json
+import copy
 
 class Context:
     room_id = None
@@ -10,7 +12,7 @@ class Context:
         self.user = user
 
 # Object to denote the status of an operation
-# Should be model-neutral
+# Should be model-neutral, can be used as REST Response
 class Result:
     def __init__(self, status, message=None):
         self.status = status
@@ -25,7 +27,13 @@ class Result:
         return Result(Status.FAILURE)
 
     def __str__(self):
-        return "<Result Object, STATUS: {}, Message: {}".format(self.status, self.message)
+        return "<Result Object, STATUS: {}, Message: {}>".format(self.status, self.message)
+
+    def toDict(self):
+        internal_dict_cpy = copy.copy(vars(self))
+        for key in internal_dict_cpy:
+            internal_dict_cpy[key] = str(internal_dict_cpy[key])
+        return internal_dict_cpy
 
 
 class Status(Enum):

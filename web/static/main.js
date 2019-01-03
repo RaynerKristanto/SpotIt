@@ -13,7 +13,7 @@ function submitForm(url, formID, event) {
         url: url,
         data: $(document.getElementById(formID)).serialize(),
         success: function() {
-            alert("submit successful");
+            alert("submit su    ccessful");
         }
     });
     
