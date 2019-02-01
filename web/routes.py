@@ -1,10 +1,11 @@
 from main import app
-from flask import request, render_template
+from flask import request, render_template, jsonify
 from utils import *
 from room import join_room, create_room, leave_room, Room_Manager
-
+from flask_socketio import SocketIO, emit
 
 room_manager = Room_Manager()
+socketio = SocketIO(app)
 
 @app.route('/')
 def hello_world():
@@ -33,7 +34,7 @@ def create_room_path():
     #Create URL to go alongside
     payload = {"url":"/room?roomID={}".format(room_id)}
     result_object["payload"] = payload
-    return str(result_object)
+    return jsonify(result_object)
 
 # Route sets the cookie for the room_id user will be attempting to join
 #TODO: Send actual page
@@ -68,3 +69,15 @@ def get_status_path():
 @app.route("/show_rooms", methods=["GET"])
 def show_rooms():
     return str(room_manager.get_rooms())
+
+@socketio.on('connect')
+def test_connect():
+    print('Client connected')
+    emit('my response', {'data': 'Connected'})
+
+@socketio.on('disconnect')
+def test_disconnect():
+    print('Client disconnected')
+
+if __name__ == '__main__':
+    socketio.run(app)

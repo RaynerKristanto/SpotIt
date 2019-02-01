@@ -1,19 +1,28 @@
+// Constants
+var successStatus = "Status.SUCCESS";
+var errorStatus = "Status.FAILURE";
+
 function showPage(html) {
     console.log("showPage");
     $("#main").load(html);
 }
 
 function submitForm(url, formID, event) {
-    console.log("submitForm");
-    console.log(document.getElementById(formID));
-    console.log(document.getElementById(formID).length);
+    let formData = $(document.getElementById(formID)).serialize();
     event.preventDefault();
     $.ajax({
         type: 'post',
         url: url,
-        data: $(document.getElementById(formID)).serialize(),
-        success: function() {
-            alert("submit su    ccessful");
+        data: formData,
+        success: function(resultObj) {
+            if (resultObj.status == successStatus) {
+                $("#main").remove();
+                $("#mainContainer").append("<h4>Invite link: " + resultObj.payload.url + "</h4>");    
+            } else {
+                $('#error').remove();
+                let errorHTML = roomNameTakenHTML.replace("?", document.getElementById("roomID").value);
+                $("#main").prepend(errorHTML);
+            }
         }
     });
     

@@ -18,9 +18,9 @@
 
       <div class="site-wrapper-inner">
 
-        <div id="main" class="cover-container">
+        <div id="mainContainer" class="cover-container">
 
-          <div class="inner cover">
+          <div id="main"class="inner cover">
             <h1 class="cover-heading">KPOP Spot It</h1>
             <form id="createRoomForm" class="small-container" enctype="multipart/form-data" onsubmit="return false">
               <label for="hostID" class="sr-only">Username</label>
@@ -46,5 +46,16 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../static/dist/js/bootstrap.min.js"></script>
     <script src="../static/main.js"></script>
+    <script src="../static/html.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function() {
+            socket.emit('my event', {data: 'I\'m connected!'});
+        });
+        socket.on('my response', function(msg) {
+          console.log(msg);
+        })
+    </script>
   </body>
 </html>
