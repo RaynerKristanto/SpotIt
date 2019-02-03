@@ -14,25 +14,31 @@ def hello_world():
 @app.route('/join', methods=["POST"])
 def join_room_path():
     room_id = request.form["roomID"]
+    user_id = request.form["userID"]
+
     if room_id == None:
         room_id = request.cookies.get('roomID')
-    user_id = request.form["userID"]
+    
     context = Context(room_id=room_id, room_manager=room_manager, user=user_id)
     result = join_room(context)
-    print(result)
-    return result.toDict()
+    result_object = result.toDict()
+    
+    payload = {"url":"/room?roomID={}".format(room_id), "users" : list(room_manager.get_room(room_id).members)}
+    print(list(room_manager.get_room(room_id).members))
+    result_object["payload"] = payload
+    socketio.emit('user joined', list(room_manager.get_room(room_id).members))
+    return jsonify(result_object)
 
 @app.route('/create', methods=["POST"])
 def create_room_path():
-    host_id = request.form["hostID"]
+    host_id = request.form["userID"]
     room_id = request.form["roomID"]
     context = Context(room_id=room_id, room_manager=room_manager, user=host_id)
     result = create_room(context)
-    print(result)
     result_object = result.toDict()
 
     #Create URL to go alongside
-    payload = {"url":"/room?roomID={}".format(room_id)}
+    payload = {"url":"/room?roomID={}".format(room_id), "users": [host_id]}
     result_object["payload"] = payload
     return jsonify(result_object)
 

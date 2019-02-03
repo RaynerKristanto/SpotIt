@@ -7,23 +7,25 @@ function showPage(html) {
     $("#main").load(html);
 }
 
-function submitForm(url, formID, event) {
+function submitRoomForm(url, formID, event) {
     let formData = $(document.getElementById(formID)).serialize();
     event.preventDefault();
+    console.log(formData);
     $.ajax({
         type: 'post',
         url: url,
         data: formData,
         success: function(resultObj) {
+            console.log(resultObj);
             if (resultObj.status == successStatus) {
                 $("#main").remove();
-                $("#mainContainer").append("<h4>Invite link: " + resultObj.payload.url + "</h4>");    
+                $("#mainContainer").append(createRoomLobbyHTML(resultObj.payload.users, resultObj.payload.url));    
             } else {
-                $('#error').remove();
-                let errorHTML = roomNameTakenHTML.replace("?", document.getElementById("roomID").value);
+                $('.error').remove();
+                let errorMessage = resultObj.message ? resultObj.message : 'Something went wrong. Please try again';
+                let errorHTML = createErrorHTML(errorMessage);
                 $("#main").prepend(errorHTML);
             }
         }
     });
-    
 }

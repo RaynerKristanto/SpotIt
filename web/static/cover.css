@@ -2,6 +2,11 @@
  * Globals
  */
 
+ /* Errors */
+ .error {
+  color: #ea4c4c;
+ }
+ 
 /* Links */
 a,
 a:focus,
@@ -63,9 +68,6 @@ body {
 .inner {
   padding: 30px;
 }
-
-
-
 
 
 /*

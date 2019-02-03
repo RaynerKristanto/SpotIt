@@ -22,13 +22,17 @@
 
           <div id="main"class="inner cover">
             <h1 class="cover-heading">KPOP Spot It</h1>
-            <form id="createRoomForm" class="small-container" enctype="multipart/form-data" onsubmit="return false">
-              <label for="hostID" class="sr-only">Username</label>
-              <input type="text" id="hostID" name="hostID" class="form-control" placeholder="Username" required autofocus>
-              <label for="roomID"  class="sr-only">RoomName</label>
-              <input type="text" id="roomID" name="roomID" class="form-control" placeholder="Room Name" required>
-              <br>
-              <button class="btn btn-default"  onclick="submitForm('{{ url_for('create_room_path') }}', 'createRoomForm', event)">Create Room</button>
+            <form id="roomForm"  enctype="multipart/form-data" onsubmit="return false">
+              <div class="small-container">
+                <label for="hostID" class="sr-only">Username</label>
+                <input type="text" id="userID" name="userID" class="form-control" placeholder="Username" required autofocus>
+                <label for="roomID"  class="sr-only">RoomName</label>
+                <input type="text" id="roomID" name="roomID" class="form-control" placeholder="Room Name" required>
+                <br>
+              </div>
+              
+              <button class="btn btn-default"  onclick="submitRoomForm('{{ url_for('create_room_path') }}', 'roomForm', event)">Create Room</button>
+              <button class="btn btn-default" onclick="submitRoomForm('{{ url_for('join_room_path') }}', 'roomForm', event)">Join Room</button>
             </form>
            
             
@@ -44,18 +48,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="../static/dist/js/bootstrap.min.js"></script>
     <script src="../static/main.js"></script>
     <script src="../static/html.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        socket.on('connect', function() {
-            socket.emit('my event', {data: 'I\'m connected!'});
-        });
-        socket.on('my response', function(msg) {
-          console.log(msg);
-        })
-    </script>
-  </body>
+    <script src="../static/socket.js"></script>
+    
 </html>

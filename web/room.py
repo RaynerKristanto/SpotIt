@@ -70,6 +70,7 @@ class Room:
         for i in self.members:
             a += str(i) + ", "
         a = a[:-2]
+
         return a
 
     def __hash__(self):
@@ -87,6 +88,7 @@ class Member:
 
 # TODO: Match error codes with correct message
 def create_room(context):
+    print('create room entered')
     new_room = Room(id=context.room_id, host=context.user)
     success = context.room_manager.add_room(new_room)
     if success == Room_Status.CREATE_SUCCESS:
@@ -97,6 +99,7 @@ def create_room(context):
         return Result.DEFAULT_FAILURE()
 
 def join_room(context):
+    print('join room entered')
     requested_room_id = context.room_id
     interested_room = context.room_manager.get_room(requested_room_id)
     if interested_room != None:
