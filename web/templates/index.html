@@ -19,24 +19,7 @@
       <div class="site-wrapper-inner">
 
         <div id="mainContainer" class="cover-container">
-
-          <div id="main"class="inner cover">
-            <h1 class="cover-heading">KPOP Spot It</h1>
-            <form id="roomForm"  enctype="multipart/form-data" onsubmit="return false">
-              <div class="small-container">
-                <label for="hostID" class="sr-only">Username</label>
-                <input type="text" id="userID" name="userID" class="form-control" placeholder="Username" required autofocus>
-                <label for="roomID"  class="sr-only">RoomName</label>
-                <input type="text" id="roomID" name="roomID" class="form-control" placeholder="Room Name" required>
-                <br>
-              </div>
-              
-              <button class="btn btn-default"  onclick="submitRoomForm('{{ url_for('create_room_path') }}', 'roomForm', event)">Create Room</button>
-              <button class="btn btn-default" onclick="submitRoomForm('{{ url_for('join_room_path') }}', 'roomForm', event)">Join Room</button>
-            </form>
-           
-            
-          </div>
+    
         </div>
 
       </div>
@@ -53,5 +36,8 @@
     <script src="../static/main.js"></script>
     <script src="../static/html.js"></script>
     <script src="../static/socket.js"></script>
-    
+    <script src="../static/dist/js/vanilla-router.js"></script>
+    <script src="../static/dist/js/handlebars-v4.0.12.js"></script>
+    <script src="../static/templates.js"></script>
+    <script src="../static/routes.js"></script>
 </html>
